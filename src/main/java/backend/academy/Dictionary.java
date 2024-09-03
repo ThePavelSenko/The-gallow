@@ -1,32 +1,51 @@
 package backend.academy;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class Dictionary {
     private final List<String> dictionary;
-    private static final List<String> categories = Arrays.asList("animals", "food", "colors");
-    private static final List<String> difficulties = Arrays.asList("easy", "medium", "hard");
+
+    // Constants for categories
+    private static final String ANIMALS = "animals";
+    private static final String FOOD = "food";
+    private static final String COLORS = "colors";
+
+    // Constants for difficulties
+    private static final String EASY = "easy";
+    private static final String MEDIUM = "medium";
+    private static final String HARD = "hard";
+
+    // Constants for error message
+    private static final String INVALID_DIFFICULTY = "Invalid difficulty: ";
+    private static final String INVALID_CATEGORY = "Invalid category: ";
+
+    // Lists of difficulties and categories
+    private static final List<String> CATEGORIES = Arrays.asList(ANIMALS, FOOD, COLORS);
+    private static final List<String> DIFFICULTIES = Arrays.asList(EASY, MEDIUM, HARD);
 
     public Dictionary() {
-        String df = difficulties.get(new Random().nextInt(difficulties.size()));
-        String ctg = categories.get(new Random().nextInt(categories.size()));
+        String df = DIFFICULTIES.get(new Random().nextInt(DIFFICULTIES.size()));
+        String ctg = CATEGORIES.get(new Random().nextInt(CATEGORIES.size()));
         this.dictionary = initializeDictionary(df, ctg);
     }
 
     public Dictionary(String df) {
-        if (!difficulties.contains(df)) {
-            throw new IllegalArgumentException("Invalid difficulty: " + df);
+        if (!DIFFICULTIES.contains(df)) {
+            throw new IllegalArgumentException(INVALID_DIFFICULTY + df);
         }
-        String ctg = categories.get(new Random().nextInt(categories.size()));
+        String ctg = CATEGORIES.get(new Random().nextInt(CATEGORIES.size()));
         this.dictionary = initializeDictionary(df, ctg);
     }
 
     public Dictionary(String df, String ctg) {
-        if (!difficulties.contains(df)) {
-            throw new IllegalArgumentException("Invalid difficulty: " + df);
+        if (!DIFFICULTIES.contains(df)) {
+            throw new IllegalArgumentException(INVALID_DIFFICULTY + df);
         }
-        if (!categories.contains(ctg)) {
-            throw new IllegalArgumentException("Invalid category: " + ctg);
+        if (!CATEGORIES.contains(ctg)) {
+            throw new IllegalArgumentException(INVALID_CATEGORY + ctg);
         }
         this.dictionary = initializeDictionary(df, ctg);
     }
@@ -36,38 +55,38 @@ public class Dictionary {
         List<String> words = new ArrayList<>();
 
         switch (ctg) {
-            case "animals":
-                if (df.equals("easy")) {
+            case ANIMALS:
+                if (df.equals(EASY)) {
                     words = Arrays.asList("cat", "dog", "pig");
-                } else if (df.equals("medium")) {
+                } else if (df.equals(MEDIUM)) {
                     words = Arrays.asList("horse", "tiger", "panda");
-                } else if (df.equals("hard")) {
+                } else if (df.equals(HARD)) {
                     words = Arrays.asList("cheetah", "giraffe", "leopard");
                 }
                 break;
 
-            case "food":
-                if (df.equals("easy")) {
+            case FOOD:
+                if (df.equals(EASY)) {
                     words = Arrays.asList("pie", "egg", "ham");
-                } else if (df.equals("medium")) {
+                } else if (df.equals(MEDIUM)) {
                     words = Arrays.asList("chips", "toast", "pizza");
-                } else if (df.equals("hard")) {
+                } else if (df.equals(HARD)) {
                     words = Arrays.asList("chicken", "sausage", "pumpkin");
                 }
                 break;
 
-            case "colors":
-                if (df.equals("easy")) {
+            case COLORS:
+                if (df.equals(EASY)) {
                     words = Arrays.asList("red", "pink", "blue");
-                } else if (df.equals("medium")) {
+                } else if (df.equals(MEDIUM)) {
                     words = Arrays.asList("black", "white", "green");
-                } else if (df.equals("hard")) {
+                } else if (df.equals(HARD)) {
                     words = Arrays.asList("orange", "yellow", "purple");
                 }
                 break;
 
             default:
-                throw new IllegalArgumentException("Unknown category: " + ctg);
+                throw new IllegalArgumentException(INVALID_CATEGORY + ctg);
         }
 
         if (words.isEmpty()) {
