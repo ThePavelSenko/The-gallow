@@ -16,7 +16,7 @@ public class GallowsInput {
         LOGGER.info("Enter letter: ");
         str = scanner.nextLine();
 
-        // If the input is correct, the cycle ends
+        // If the input is correct, the cycle don't start
         while (str.length() != 1 || !Character.isLetter(str.charAt(0))) {
             LOGGER.warning("Invalid input. Please enter a single letter: ");
             str = scanner.nextLine();
