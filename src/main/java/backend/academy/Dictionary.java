@@ -32,7 +32,7 @@ public class Dictionary {
         this.dictionary = initializeDictionary(df, ctg);
     }
 
-    public Dictionary(String df) {
+    public Dictionary(String df) throws IllegalArgumentException{
         if (!DIFFICULTIES.contains(df)) {
             throw new IllegalArgumentException(INVALID_DIFFICULTY + df);
         }
@@ -40,7 +40,7 @@ public class Dictionary {
         this.dictionary = initializeDictionary(df, ctg);
     }
 
-    public Dictionary(String df, String ctg) {
+    public Dictionary(String df, String ctg) throws IllegalArgumentException {
         if (!DIFFICULTIES.contains(df)) {
             throw new IllegalArgumentException(INVALID_DIFFICULTY + df);
         }
@@ -51,7 +51,10 @@ public class Dictionary {
     }
 
     // The logic of dictionary initialization
-    private List<String> initializeDictionary(String df, String ctg) {
+    private List<String> initializeDictionary(String df, String ctg)
+        throws
+        IllegalStateException,
+        IllegalArgumentException {
         List<String> words = new ArrayList<>();
 
         switch (ctg) {
@@ -96,7 +99,7 @@ public class Dictionary {
         return words;
     }
 
-    public String getRandomWord() {
+    public String getRandomWord() throws IllegalStateException {
         if (dictionary.isEmpty()) {
             throw new IllegalStateException("Dictionary is empty. No words available to choose from.");
         }
