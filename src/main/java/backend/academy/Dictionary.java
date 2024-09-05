@@ -32,7 +32,7 @@ public class Dictionary {
         this.dictionary = initializeDictionary(df, ctg);
     }
 
-    public Dictionary(String df) throws IllegalArgumentException{
+    public Dictionary(String df) throws IllegalArgumentException {
         if (!DIFFICULTIES.contains(df)) {
             throw new IllegalArgumentException(INVALID_DIFFICULTY + df);
         }
