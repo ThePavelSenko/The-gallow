@@ -36,16 +36,20 @@ public class ViewOfTheGallows {
 
     public void displayWord(String wordToGuess, Set<Character> guessedLetters) {
         StringBuilder word = new StringBuilder();
-        for (char c : wordToGuess.toCharArray()) {
+        for (int i = 0; i < wordToGuess.length(); i++) {
+            char c = wordToGuess.charAt(i);
             if (guessedLetters.contains(c)) {
                 word.append(c);
             } else {
                 word.append("-");
             }
-            word.append(" ");
+            if (i < wordToGuess.length() - 1) {
+                word.append(" ");
+            }
         }
-        out.println(word.toString());
+        out.print(word.toString());
     }
+
 
     public void displayGallows(int countAttempts) {
         out.println(GALLOWS_PICS[GALLOWS_PICS.length - countAttempts - 1]);
