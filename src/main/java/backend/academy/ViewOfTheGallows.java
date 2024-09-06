@@ -1,12 +1,16 @@
 package backend.academy;
 
+import java.io.PrintStream;
 import java.util.Set;
-import java.util.logging.Logger;
 
 public class ViewOfTheGallows {
-
     private static final String[] GALLOWS_PICS = createGallowsPics();
-    private static final Logger LOGGER = Logger.getLogger(ViewOfTheGallows.class.getName());
+    private final PrintStream out;
+
+    // when creating an object, you can transfer any output streams
+    public ViewOfTheGallows(PrintStream out) {
+        this.out = out;
+    }
 
     private static String[] createGallowsPics() {
         String emptyRow = "      |\n";
@@ -40,14 +44,14 @@ public class ViewOfTheGallows {
             }
             word.append(" ");
         }
-        LOGGER.info(word.toString());
+        out.println(word.toString());
     }
 
     public void displayGallows(int countAttempts) {
-        LOGGER.info(GALLOWS_PICS[GALLOWS_PICS.length - countAttempts - 1]);
+        out.println(GALLOWS_PICS[GALLOWS_PICS.length - countAttempts - 1]);
     }
 
     public void displayAttemptsLeft(int attemptsLeft) {
-        LOGGER.info("Attempts left: " + attemptsLeft);
+        out.println("Attempts left: " + attemptsLeft);
     }
 }

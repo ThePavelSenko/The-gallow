@@ -1,24 +1,27 @@
 package backend.academy;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 public class GallowsInput {
-    private static final Logger LOGGER = Logger.getLogger(GallowsInput.class.getName());
-    private static Scanner scanner;
+    private final Scanner scanner;
+    private final PrintStream out;
 
-    public GallowsInput() {
-        scanner = new Scanner(System.in);
+    // when creating an object, you can transfer any input and output streams
+    public GallowsInput(InputStream in, PrintStream out) {
+        this.scanner = new Scanner(in);
+        this.out = out;
     }
 
     public char playerInputLetter() {
         String str;
-        LOGGER.info("Enter letter: ");
+        out.print("Enter letter: ");
         str = scanner.nextLine();
 
-        // If the input is correct, the cycle don't start
+        // If the input is incorrect, the loop continues
         while (str.length() != 1 || !Character.isLetter(str.charAt(0))) {
-            LOGGER.warning("Invalid input. Please enter a single letter: ");
+            out.print("Invalid input. Please enter a single letter: ");
             str = scanner.nextLine();
         }
         return str.charAt(0);
