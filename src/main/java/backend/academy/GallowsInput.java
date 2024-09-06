@@ -26,4 +26,8 @@ public class GallowsInput {
         }
         return str.charAt(0);
     }
+
+    public void printMessage(String message) {
+        out.println(message);
+    }
 }
