@@ -36,6 +36,7 @@ public class ViewOfTheGallows {
 
     public void displayWord(String wordToGuess, Set<Character> guessedLetters) {
         StringBuilder word = new StringBuilder();
+        word.append("Word: ");
         for (int i = 0; i < wordToGuess.length(); i++) {
             char c = wordToGuess.charAt(i);
             if (guessedLetters.contains(c)) {
@@ -47,6 +48,7 @@ public class ViewOfTheGallows {
                 word.append(" ");
             }
         }
+        word.append("\n");
         out.print(word.toString());
     }
 
@@ -57,5 +59,9 @@ public class ViewOfTheGallows {
 
     public void displayAttemptsLeft(int attemptsLeft) {
         out.println("Attempts left: " + attemptsLeft);
+    }
+
+    public void helloMessage() {
+        out.println("Welcome to the Gallows game!");
     }
 }
