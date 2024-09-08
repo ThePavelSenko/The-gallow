@@ -17,7 +17,7 @@ public class GallowsInput {
     public char playerInputLetter() {
         String str;
         out.print("Enter letter: ");
-        str = scanner.nextLine();
+        str = scanner.nextLine().toLowerCase();
 
         // If the input is incorrect, the loop continues
         while (str.length() != 1 || !Character.isLetter(str.charAt(0))) {
@@ -29,5 +29,15 @@ public class GallowsInput {
 
     public void printMessage(String message) {
         out.println(message);
+    }
+
+    public String getDifficulty() {
+        out.println("Enter the difficulty easy/medium/hard: ");
+        return scanner.nextLine();
+    }
+
+    public String getCategory() {
+        out.println("Enter the category animals/food/colors: ");
+        return scanner.nextLine();
     }
 }
