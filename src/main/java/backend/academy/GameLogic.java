@@ -76,9 +76,9 @@ public class GameLogic {
 
     public void play() {
         while (!isGameOver()) {
-            view.displayGallows(attemptsLeft);
             view.displayWord(hiddenWord, guessedLetters);
             view.displayAttemptsLeft(attemptsLeft);
+            view.displayGallows(attemptsLeft);
             char letter = gallowsInput.playerInputLetter();
 
             if (guess(letter)) {
@@ -92,6 +92,7 @@ public class GameLogic {
                 }
             }
         }
+        view.displayGallows(attemptsLeft);
         gallowsInput.printMessage("You have lost! Secret word was: " + secretWord);
         OUT.println();
     }
@@ -100,7 +101,6 @@ public class GameLogic {
     public void run() {
         boolean button = false;
         GallowsInput input = new GallowsInput(IN, OUT);
-        input.printMessage("Welcome to the Gallows game!");
         input.printMessage("Press N to start a new game or Q to quit.");
 
         char response;
