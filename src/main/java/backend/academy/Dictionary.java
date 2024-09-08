@@ -1,12 +1,16 @@
 package backend.academy;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Dictionary {
     private final List<String> dictionary;
+    static Scanner scanner = new Scanner(System.in);
+    private static final PrintStream OUT = System.out;
 
     // Constants for categories
     private static final String ANIMALS = "animals";
@@ -26,13 +30,13 @@ public class Dictionary {
     private static final List<String> CATEGORIES = Arrays.asList(ANIMALS, FOOD, COLORS);
     private static final List<String> DIFFICULTIES = Arrays.asList(EASY, MEDIUM, HARD);
 
-    public Dictionary() {
+    private Dictionary() {
         String df = DIFFICULTIES.get(new Random().nextInt(DIFFICULTIES.size()));
         String ctg = CATEGORIES.get(new Random().nextInt(CATEGORIES.size()));
         this.dictionary = initializeDictionary(df, ctg);
     }
 
-    public Dictionary(String df) throws IllegalArgumentException {
+    private Dictionary(String df) throws IllegalArgumentException {
         if (!DIFFICULTIES.contains(df)) {
             throw new IllegalArgumentException(INVALID_DIFFICULTY + df);
         }
@@ -40,7 +44,7 @@ public class Dictionary {
         this.dictionary = initializeDictionary(df, ctg);
     }
 
-    public Dictionary(String df, String ctg) throws IllegalArgumentException {
+    private Dictionary(String df, String ctg) throws IllegalArgumentException {
         if (!DIFFICULTIES.contains(df)) {
             throw new IllegalArgumentException(INVALID_DIFFICULTY + df);
         }
@@ -99,11 +103,26 @@ public class Dictionary {
         return words;
     }
 
-    public String getRandomWord() throws IllegalStateException {
+    private String createRandomWord() throws IllegalStateException {
         if (dictionary.isEmpty()) {
             throw new IllegalStateException("Dictionary is empty. No words available to choose from.");
         }
         Random rand = new Random();
         return dictionary.get(rand.nextInt(dictionary.size()));
+    }
+
+    public static String getDictionaryRandomWord(String difficulty, String category) {
+        Dictionary dictionary;
+        switch (difficulty) {
+            case "easy", "medium", "hard" -> {
+                switch (category) {
+                    case "animals", "food", "colors" -> dictionary = new Dictionary(difficulty, category);
+                    default -> dictionary = new Dictionary(difficulty);
+                }
+            }
+            default -> dictionary = new Dictionary();
+        }
+
+        return dictionary.createRandomWord();
     }
 }
