@@ -40,31 +40,31 @@ public class Dictionary {
         switch (finalCategory) {
             case ANIMALS:
                 if (finalDifficulty.equals(EASY)) {
-                    words = Arrays.asList("cat", "dog", "pig");
+                    words = Arrays.asList("CAT", "DOG", "PIG");
                 } else if (finalDifficulty.equals(MEDIUM)) {
-                    words = Arrays.asList("horse", "tiger", "panda");
+                    words = Arrays.asList("HORSE", "TIGER", "PANDA");
                 } else if (finalDifficulty.equals(HARD)) {
-                    words = Arrays.asList("cheetah", "giraffe", "leopard");
+                    words = Arrays.asList("CHEETAH", "GIRAFFE", "LEOPARD");
                 }
                 break;
 
             case FOOD:
                 if (finalDifficulty.equals(EASY)) {
-                    words = Arrays.asList("pie", "egg", "ham");
+                    words = Arrays.asList("PIE", "EGG", "HAM");
                 } else if (finalDifficulty.equals(MEDIUM)) {
-                    words = Arrays.asList("chips", "toast", "pizza");
+                    words = Arrays.asList("CHIPS", "TOAST", "PIZZA");
                 } else if (finalDifficulty.equals(HARD)) {
-                    words = Arrays.asList("chicken", "sausage", "pumpkin");
+                    words = Arrays.asList("CHICKEN", "SAUSAGE", "PUMPKIN");
                 }
                 break;
 
             case COLORS:
                 if (finalDifficulty.equals(EASY)) {
-                    words = Arrays.asList("red", "pink", "blue");
+                    words = Arrays.asList("RED", "PINK", "BLUE");
                 } else if (finalDifficulty.equals(MEDIUM)) {
-                    words = Arrays.asList("black", "white", "green");
+                    words = Arrays.asList("BLACK", "WHITE", "GREEN");
                 } else if (finalDifficulty.equals(HARD)) {
-                    words = Arrays.asList("orange", "yellow", "purple");
+                    words = Arrays.asList("ORANGE", "YELLOW", "PURPLE");
                 }
                 break;
 

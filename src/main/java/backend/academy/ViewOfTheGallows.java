@@ -48,7 +48,6 @@ public class ViewOfTheGallows {
                 word.append(" ");
             }
         }
-        word.append("\n");
         out.print(word.toString());
     }
 
@@ -58,7 +57,7 @@ public class ViewOfTheGallows {
     }
 
     public void displayAttemptsLeft(int attemptsLeft) {
-        out.println("Attempts left: " + attemptsLeft);
+        out.println("\nAttempts left: " + attemptsLeft);
     }
 
     public void helloMessage() {

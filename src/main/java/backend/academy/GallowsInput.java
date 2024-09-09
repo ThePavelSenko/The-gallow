@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+
 public class GallowsInput {
     private final Scanner scanner;
     private final PrintStream out;
@@ -17,12 +18,12 @@ public class GallowsInput {
     public char playerInputLetter() {
         String str;
         out.print("Enter letter: ");
-        str = scanner.nextLine().toLowerCase();
-
+        str = scanner.nextLine().toUpperCase();
+        out.println();
         // If the input is incorrect, the loop continues
         while (str.length() != 1 || !Character.isLetter(str.charAt(0))) {
             out.print("Invalid input. Please enter a single letter: ");
-            str = scanner.nextLine();
+            str = scanner.nextLine().toUpperCase();
         }
         return str.charAt(0);
     }
