@@ -19,12 +19,13 @@ public class ViewOfTheGallowsTest {
 
     @ParameterizedTest
     @CsvSource({
-        "panda, p a - - a",
-        "cat, c a -",
-        "yellow, - - - - - -",
-        "chicken, c - - c - - -"})
+        "PANDA, Word: P A - - A",
+        "CAT, Word: C A -",
+        "YELLOW, Word: - - - - - -",
+        "CHICKEN, Word: C - - C - - -"
+    })
     public void testDisplayWord(String word, String expected) {
-        Set<Character> guessedLetters = Set.of('a', 'p', 'c');
+        Set<Character> guessedLetters = Set.of('A', 'P', 'C');
 
         view.displayWord(word, guessedLetters);
 

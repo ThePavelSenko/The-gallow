@@ -3,9 +3,9 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.Assertions;
+import static java.lang.System.out;
 
 public class GallowsInputTest {
-    PrintStream out = System.out;
 
     @Test
     public void testPlayerInputValidLetter() {
@@ -16,7 +16,7 @@ public class GallowsInputTest {
         GallowsInput gallowsInput = new GallowsInput(in, out);
         char result = gallowsInput.playerInputLetter();
 
-        Assertions.assertEquals('a', result);
+        Assertions.assertEquals('A', result);
     }
 
     @Test
@@ -29,6 +29,6 @@ public class GallowsInputTest {
         GallowsInput gallowsInput = new GallowsInput(in, out);
         char result = gallowsInput.playerInputLetter();
 
-        Assertions.assertEquals('b', result);
+        Assertions.assertEquals('B', result);
     }
 }
