@@ -2,17 +2,16 @@ package backend.academy;
 
 import java.util.HashSet;
 import java.util.Set;
-import lombok.Getter;
 import static backend.academy.Stream.OUT;
 
 public class GameLogic {
-    @Getter static final int MAX_ATTEMPTS = 6;
+    public static int MAX_ATTEMPTS = 6;
     GallowsInput gallowsInput;
-    @Getter private String secretWord;
-    @Getter private String hiddenWord;
+    private String secretWord;
+    private String hiddenWord;
     private int attemptsLeft;
-    @Getter Set<Character> guessedLetters;
-    @Getter Set<Character> incorrectLetters;
+    private Set<Character> guessedLetters;
+    private Set<Character> incorrectLetters;
     private ViewOfTheGallows view;
 
     private int errorsCount = 0;
