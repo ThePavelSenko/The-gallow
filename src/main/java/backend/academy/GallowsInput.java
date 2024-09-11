@@ -1,8 +1,7 @@
 package backend.academy;
 
-import static backend.academy.Stream.SCANNER;
 import static backend.academy.Stream.OUT;
-
+import static backend.academy.Stream.SCANNER;
 
 public class GallowsInput {
 
