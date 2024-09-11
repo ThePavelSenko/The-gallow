@@ -1,10 +1,9 @@
 package backend.academy;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.Getter;
+import static backend.academy.Stream.OUT;
 
 public class GameLogic {
     @Getter static final int MAX_ATTEMPTS = 6;
@@ -15,8 +14,6 @@ public class GameLogic {
     @Getter Set<Character> guessedLetters;
     @Getter Set<Character> incorrectLetters;
     private ViewOfTheGallows view;
-    private static final InputStream IN = System.in;
-    private static final PrintStream OUT = System.out;
 
     private int errorsCount = 0;
 
@@ -100,7 +97,7 @@ public class GameLogic {
 
     public void run() {
         boolean button = false;
-        GallowsInput input = new GallowsInput(IN, OUT);
+        GallowsInput input = new GallowsInput();
         input.printMessage("Press N to start a new game or Q to quit.");
 
         char response;

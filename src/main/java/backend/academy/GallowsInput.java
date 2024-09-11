@@ -1,44 +1,35 @@
 package backend.academy;
 
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
+import static backend.academy.Stream.SCANNER;
+import static backend.academy.Stream.OUT;
 
 
 public class GallowsInput {
-    private final Scanner scanner;
-    private final PrintStream out;
-
-    // when creating an object, you can transfer any input and output streams
-    public GallowsInput(InputStream in, PrintStream out) {
-        this.scanner = new Scanner(in);
-        this.out = out;
-    }
 
     public char playerInputLetter() {
         String str;
-        out.print("Enter letter: ");
-        str = scanner.nextLine().toUpperCase();
-        out.println();
+        OUT.print("Enter letter: ");
+        str = SCANNER.nextLine().toUpperCase();
+        OUT.println();
         // If the input is incorrect, the loop continues
         while (str.length() != 1 || !Character.isLetter(str.charAt(0))) {
-            out.print("Invalid input. Please enter a single letter: ");
-            str = scanner.nextLine().toUpperCase();
+            OUT.print("Invalid input. Please enter a single letter: ");
+            str = SCANNER.nextLine().toUpperCase();
         }
         return str.charAt(0);
     }
 
     public void printMessage(String message) {
-        out.println(message);
+        OUT.println(message);
     }
 
     public String getDifficulty() {
-        out.println("Enter the difficulty easy/medium/hard: ");
-        return scanner.nextLine();
+        OUT.println("Enter the difficulty easy/medium/hard: ");
+        return SCANNER.nextLine();
     }
 
     public String getCategory() {
-        out.println("Enter the category animals/food/colors: ");
-        return scanner.nextLine();
+        OUT.println("Enter the category animals/food/colors: ");
+        return SCANNER.nextLine();
     }
 }

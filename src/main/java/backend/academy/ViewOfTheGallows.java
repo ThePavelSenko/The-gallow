@@ -1,16 +1,10 @@
 package backend.academy;
 
-import java.io.PrintStream;
 import java.util.Set;
+import static backend.academy.Stream.OUT;
 
 public class ViewOfTheGallows {
     private static final String[] GALLOWS_PICS = createGallowsPics();
-    private final PrintStream out;
-
-    // when creating an object, you can transfer any output streams
-    public ViewOfTheGallows(PrintStream out) {
-        this.out = out;
-    }
 
     private static String[] createGallowsPics() {
         String emptyRow = "      |\n";
@@ -48,19 +42,19 @@ public class ViewOfTheGallows {
                 word.append(" ");
             }
         }
-        out.print(word.toString());
+        OUT.print(word);
     }
 
 
     public void displayGallows(int countAttempts) {
-        out.println(GALLOWS_PICS[GALLOWS_PICS.length - countAttempts - 1]);
+        OUT.println(GALLOWS_PICS[GALLOWS_PICS.length - countAttempts - 1]);
     }
 
     public void displayAttemptsLeft(int attemptsLeft) {
-        out.println("\nAttempts left: " + attemptsLeft);
+        OUT.println("\nAttempts left: " + attemptsLeft);
     }
 
     public void helloMessage() {
-        out.println("Welcome to the Gallows game!");
+        OUT.println("Welcome to the Gallows game!");
     }
 }
