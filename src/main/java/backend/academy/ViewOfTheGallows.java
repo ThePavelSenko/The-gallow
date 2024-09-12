@@ -1,6 +1,7 @@
 package backend.academy;
 
 import java.util.Set;
+import static backend.academy.GameLogic.MAX_ATTEMPTS;
 import static backend.academy.Stream.OUT;
 
 public class ViewOfTheGallows {
@@ -47,7 +48,13 @@ public class ViewOfTheGallows {
 
 
     public void displayGallows(int countAttempts) {
-        OUT.println(GALLOWS_PICS[GALLOWS_PICS.length - countAttempts - 1]);
+        if (countAttempts > MAX_ATTEMPTS) {
+            OUT.println(GALLOWS_PICS[0]);
+        } else if (countAttempts < MAX_ATTEMPTS) {
+            OUT.println(GALLOWS_PICS[MAX_ATTEMPTS - countAttempts]);
+        } else {
+            OUT.println(GALLOWS_PICS[GALLOWS_PICS.length - countAttempts - 1]);
+        }
     }
 
     public void displayAttemptsLeft(int attemptsLeft) {

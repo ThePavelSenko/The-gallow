@@ -5,9 +5,9 @@ import java.util.Set;
 import static backend.academy.Stream.OUT;
 
 public class GameLogic {
-    public static int MAX_ATTEMPTS = 6;
+    public static final int MAX_ATTEMPTS = 6;
     GallowsInput gallowsInput;
-    private String secretWord;
+    private final String secretWord;
     private String hiddenWord;
     private int attemptsLeft;
     private Set<Character> guessedLetters;
@@ -21,7 +21,7 @@ public class GameLogic {
         this.view = view;
         this.secretWord = secretWord;
         this.hiddenWord = generateHiddenWord(secretWord.length());
-        this.attemptsLeft = MAX_ATTEMPTS;
+        this.attemptsLeft = gallowsInput.getMaxAttempts();
         this.guessedLetters = new HashSet<>();
         this.incorrectLetters = new HashSet<>();
     }
