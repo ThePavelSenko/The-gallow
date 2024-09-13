@@ -1,40 +1,31 @@
-import backend.academy.ViewOfTheGallows;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Set;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import static org.assertj.core.api.Assertions.assertThat;
+import backend.academy.ViewOfTheGallows;
 
-public class ViewOfTheGallowsTest {
+class ViewOfTheGallowsTest {
 
-    private ByteArrayOutputStream outContent;
-    private PrintStream originalOut;
-    private ViewOfTheGallows view;
+    @ParameterizedTest
+    @CsvSource({
+        "PANDA, P A - - A",
+        "CAT, C A -",
+        "YELLOW, - - - - - -",
+        "CHICKEN, C - - C - - -"
+    })
+    void testDisplayWord(String wordToGuess, String expectedOutput) {
 
-    @BeforeEach
-    public void setUp() {
-        originalOut = System.out;
-        outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        view = new ViewOfTheGallows();
-    }
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
 
-    @Test
-    public void testDisplayWord() {
-        String wordToGuess = "GIRAFFE";
-        Set<Character> guessedLetters = Set.of('F', 'A', 'G');
+        ViewOfTheGallows viewOfTheGallows = new ViewOfTheGallows(printStream);
 
-        view.displayWord(wordToGuess, guessedLetters);
+        Set<Character> guessedLetters = Set.of('A', 'P', 'C');
 
-        String expectedOutput = "Word: G - - A F F -";
+        viewOfTheGallows.displayWord(wordToGuess, guessedLetters);
 
-        assertThat(outContent.toString().trim()).isEqualTo(expectedOutput);
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.setOut(originalOut);
+        assertThat(outputStream.toString().trim()).isEqualTo("Word: " + expectedOutput);
     }
 }

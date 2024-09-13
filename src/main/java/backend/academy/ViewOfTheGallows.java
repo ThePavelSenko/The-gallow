@@ -1,10 +1,16 @@
 package backend.academy;
 
+import java.io.PrintStream;
 import java.util.Set;
 import static backend.academy.GameLogic.MAX_ATTEMPTS;
-import static backend.academy.Stream.OUT;
 
 public class ViewOfTheGallows {
+    private final PrintStream out;
+
+    public ViewOfTheGallows(PrintStream out) {
+        this.out = out;
+    }
+
     private static final String[] GALLOWS_PICS = createGallowsPics();
 
     private static String[] createGallowsPics() {
@@ -43,25 +49,25 @@ public class ViewOfTheGallows {
                 word.append(" ");
             }
         }
-        OUT.print(word);
+        this.out.print(word);
     }
 
 
     public void displayGallows(int countAttempts) {
         if (countAttempts > MAX_ATTEMPTS) {
-            OUT.println(GALLOWS_PICS[0]);
+            this.out.println(GALLOWS_PICS[0]);
         } else if (countAttempts < MAX_ATTEMPTS) {
-            OUT.println(GALLOWS_PICS[MAX_ATTEMPTS - countAttempts]);
+            this.out.println(GALLOWS_PICS[MAX_ATTEMPTS - countAttempts]);
         } else {
-            OUT.println(GALLOWS_PICS[GALLOWS_PICS.length - countAttempts - 1]);
+            this.out.println(GALLOWS_PICS[GALLOWS_PICS.length - countAttempts - 1]);
         }
     }
 
     public void displayAttemptsLeft(int attemptsLeft) {
-        OUT.println("\nAttempts left: " + attemptsLeft);
+        this.out.println("\nAttempts left: " + attemptsLeft);
     }
 
     public void helloMessage() {
-        OUT.println("Welcome to the Gallows game!");
+        this.out.println("Welcome to the Gallows game!");
     }
 }
