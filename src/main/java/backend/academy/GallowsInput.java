@@ -1,11 +1,13 @@
 package backend.academy;
 
+import java.util.Scanner;
 import static backend.academy.GameLogic.MAX_ATTEMPTS;
+import static backend.academy.Stream.IN;
 import static backend.academy.Stream.OUT;
-import static backend.academy.Stream.SCANNER;
 
 
 public class GallowsInput {
+    public static final Scanner SCANNER = new Scanner(IN);
 
     public char playerInputLetter() {
         String str;

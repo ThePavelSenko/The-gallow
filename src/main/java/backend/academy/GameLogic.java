@@ -2,6 +2,7 @@ package backend.academy;
 
 import java.util.HashSet;
 import java.util.Set;
+import static backend.academy.GallowsInput.SCANNER;
 import static backend.academy.Stream.OUT;
 
 public class GameLogic {
@@ -112,5 +113,7 @@ public class GameLogic {
                 input.printMessage("Invalid input, please try again.");
             }
         } while (!button);
+
+        SCANNER.close();
     }
 }
