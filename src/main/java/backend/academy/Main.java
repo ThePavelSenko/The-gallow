@@ -12,7 +12,7 @@ public class Main {
         view.helloMessage();
 
         GameLogic logic = new GameLogic(
-            Dictionary.initializeWord(gallowsInput.getDifficulty(), gallowsInput.getCategory()),
+            Dictionary.getWord(gallowsInput.getDifficulty(), gallowsInput.getCategory()).word,
             view,
             gallowsInput);
 
