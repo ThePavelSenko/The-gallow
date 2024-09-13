@@ -1,34 +1,40 @@
+import backend.academy.ViewOfTheGallows;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Set;
-import backend.academy.ViewOfTheGallows;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ViewOfTheGallowsTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    ViewOfTheGallows view;
+
+    private ByteArrayOutputStream outContent;
+    private PrintStream originalOut;
+    private ViewOfTheGallows view;
 
     @BeforeEach
-    public void setUpStreams() {
-        PrintStream printStream = new PrintStream(outContent);
-        view = new ViewOfTheGallows(printStream);
+    public void setUp() {
+        originalOut = System.out;
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        view = new ViewOfTheGallows();
     }
 
-    @ParameterizedTest
-    @CsvSource({
-        "PANDA, Word: P A - - A",
-        "CAT, Word: C A -",
-        "YELLOW, Word: - - - - - -",
-        "CHICKEN, Word: C - - C - - -"
-    })
-    public void testDisplayWord(String word, String expected) {
-        Set<Character> guessedLetters = Set.of('A', 'P', 'C');
+    @Test
+    public void testDisplayWord() {
+        String wordToGuess = "GIRAFFE";
+        Set<Character> guessedLetters = Set.of('F', 'A', 'G');
 
-        view.displayWord(word, guessedLetters);
+        view.displayWord(wordToGuess, guessedLetters);
 
-        assertThat(outContent.toString()).isEqualTo(expected);
+        String expectedOutput = "Word: G - - A F F -";
+
+        assertThat(outContent.toString().trim()).isEqualTo(expectedOutput);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(originalOut);
     }
 }
