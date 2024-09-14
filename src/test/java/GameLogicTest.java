@@ -1,5 +1,5 @@
-import backend.academy.GallowsInput;
 import backend.academy.GameLogic;
+import backend.academy.GallowsInput;
 import backend.academy.ViewOfTheGallows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,13 +20,12 @@ public class GameLogicTest {
     public void setUp() {
         mockInput = mock(GallowsInput.class);
         mockView = mock(ViewOfTheGallows.class);
-        when(mockInput.getMaxAttempts()).thenReturn(GameLogic.MAX_ATTEMPTS); // Устанавливаем количество попыток
-        logic = new GameLogic("cat", mockView, mockInput);
+        when(mockInput.getMaxAttempts()).thenReturn(GameLogic.MAX_DEFAULT_ATTEMPTS); // Устанавливаем количество попыток
+        logic = new GameLogic("cat", "A small domesticated carnivorous mammal", mockView, mockInput);
     }
 
     @Test
     public void testPlayWin() {
-        // We ask the right answers to win
         Mockito.when(mockInput.playerInputLetter()).thenReturn('c', 'a', 't');
 
         logic.play();
@@ -37,22 +36,20 @@ public class GameLogicTest {
 
         verify(mockView, times(3)).displayGallows(anyInt());
 
-        verify(mockInput).printMessage("You have won!");
+        verify(mockInput).printMessage("\nYou have won!");
     }
 
     @Test
     public void testPlayLose() {
-        // Asking the wrong answers to lose
-        Mockito.when(mockInput.playerInputLetter()).thenReturn('x', 'y', 'z', 'u', 'v', 'w');
+        Mockito.when(mockInput.playerInputLetter()).thenReturn('x', 'y', 'a', 's', 'z', 'c', 'w');
 
         logic.play();
 
+        verify(mockView, times(8)).displayWord(anyString(), anySet());
 
-        verify(mockView, times(6)).displayWord(anyString(), anySet());
+        verify(mockView, times(8)).displayAttemptsLeft(anyInt());
 
-        verify(mockView, times(6)).displayAttemptsLeft(anyInt());
-
-        verify(mockView, times(7)).displayGallows(anyInt());
+        verify(mockView, times(9)).displayGallows(anyInt());
 
         verify(mockInput).printMessage("You have lost! Secret word was: cat");
     }
