@@ -2,7 +2,7 @@ package backend.academy;
 
 import java.io.PrintStream;
 import java.util.Set;
-import static backend.academy.GameLogic.MAX_ATTEMPTS;
+import static backend.academy.GameLogic.MAX_DEFAULT_ATTEMPTS;
 
 public class ViewOfTheGallows {
     private final PrintStream out;
@@ -54,10 +54,10 @@ public class ViewOfTheGallows {
 
 
     public void displayGallows(int countAttempts) {
-        if (countAttempts > MAX_ATTEMPTS) {
+        if (countAttempts > MAX_DEFAULT_ATTEMPTS) {
             this.out.println(GALLOWS_PICS[0]);
-        } else if (countAttempts < MAX_ATTEMPTS) {
-            this.out.println(GALLOWS_PICS[MAX_ATTEMPTS - countAttempts]);
+        } else if (countAttempts < MAX_DEFAULT_ATTEMPTS) {
+            this.out.println(GALLOWS_PICS[MAX_DEFAULT_ATTEMPTS - countAttempts]);
         } else {
             this.out.println(GALLOWS_PICS[GALLOWS_PICS.length - countAttempts - 1]);
         }
@@ -69,5 +69,9 @@ public class ViewOfTheGallows {
 
     public void helloMessage() {
         this.out.println("Welcome to the Gallows game!");
+    }
+
+    public void hintMessage() {
+        this.out.println("Do you want to get a hint? Input please \"Y\" if you want or another letter if don't want: ");
     }
 }

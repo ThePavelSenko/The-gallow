@@ -5,7 +5,8 @@ import java.util.Set;
 import static backend.academy.Stream.OUT;
 
 public class GameLogic {
-    public static final int MAX_ATTEMPTS = 6;
+    public static final int MAX_DEFAULT_ATTEMPTS = 6;
+    private static final int HINT_GET_STRING = 3;
     GallowsInput gallowsInput;
     private final String secretWord;
     private String hiddenWord;
@@ -13,10 +14,11 @@ public class GameLogic {
     private Set<Character> guessedLetters;
     private Set<Character> incorrectLetters;
     private ViewOfTheGallows view;
-
+    private GallowsInput input;
+    private String wordDescription;
     private int errorsCount = 0;
 
-    public GameLogic(String secretWord, ViewOfTheGallows view, GallowsInput gallowsInput) {
+    public GameLogic(String secretWord, String wordDescription, ViewOfTheGallows view, GallowsInput gallowsInput) {
         this.gallowsInput = gallowsInput;
         this.view = view;
         this.secretWord = secretWord;
@@ -24,6 +26,8 @@ public class GameLogic {
         this.attemptsLeft = gallowsInput.getMaxAttempts();
         this.guessedLetters = new HashSet<>();
         this.incorrectLetters = new HashSet<>();
+        this.input = new GallowsInput();
+        this.wordDescription = wordDescription;
     }
 
     private String generateHiddenWord(int length) {
@@ -34,7 +38,7 @@ public class GameLogic {
         return sb.toString();
     }
 
-    public boolean guess(char letter) {
+    private boolean guess(char letter) {
         boolean isCorrect = false;
 
         for (int i = 0; i < secretWord.length(); i++) {
@@ -53,39 +57,41 @@ public class GameLogic {
         return isCorrect;
     }
 
-    public boolean isWordGuessed() {
+    private boolean isWordGuessed() {
         return secretWord.equals(hiddenWord);
     }
 
-    public boolean isGameOver() {
+    private boolean isGameOver() {
         return attemptsLeft == 0;
     }
 
-    public void resetGame() {
-        attemptsLeft = MAX_ATTEMPTS;
-        guessedLetters.clear();
-        incorrectLetters.clear();
-        errorsCount = 0;
-        hiddenWord = generateHiddenWord(secretWord.length());
-
-    }
-
     public void play() {
+        int hint = 0;
         while (!isGameOver()) {
+            char response;
             view.displayWord(hiddenWord, guessedLetters);
             view.displayAttemptsLeft(attemptsLeft);
             view.displayGallows(attemptsLeft);
             char letter = gallowsInput.playerInputLetter();
 
             if (guess(letter)) {
+                hint = 0;
                 if (isWordGuessed()) {
                     view.displayWord(hiddenWord, guessedLetters);
-                    gallowsInput.printMessage("You have won!");
+                    gallowsInput.printMessage("\nYou have won!");
                     OUT.println();
                     return;
-                } else {
-                    gallowsInput.printMessage("Try again!");
                 }
+            } else {
+                hint++;
+            }
+            if (hint == HINT_GET_STRING) {
+                view.hintMessage();
+                response = input.playerInputLetter();
+                if (response == 'Y') {
+                    OUT.println("HINT: " + wordDescription + "\n");
+                }
+                hint = 0;
             }
         }
         view.displayGallows(attemptsLeft);
@@ -93,10 +99,8 @@ public class GameLogic {
         OUT.println();
     }
 
-
     public void run() {
         boolean button = false;
-        GallowsInput input = new GallowsInput();
         input.printMessage("Press N to start a new game or Q to quit.");
 
         char response;
@@ -112,7 +116,5 @@ public class GameLogic {
                 input.printMessage("Invalid input, please try again.");
             }
         } while (!button);
-
-        OUT.close();
     }
 }

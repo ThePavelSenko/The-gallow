@@ -72,7 +72,7 @@ public class Dictionary {
     private static final List<String> DIFFICULTIES = Arrays.asList("easy", "medium", "hard");
 
     // The logic of initialize word
-    public static WordData getWord(String difficulty, String category) {
+    public static WordData getWordData(String difficulty, String category) {
         String finalDifficulty;
         String finalCategory;
 

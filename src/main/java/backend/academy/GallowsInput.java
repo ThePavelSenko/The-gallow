@@ -1,7 +1,7 @@
 package backend.academy;
 
 import java.util.Scanner;
-import static backend.academy.GameLogic.MAX_ATTEMPTS;
+import static backend.academy.GameLogic.MAX_DEFAULT_ATTEMPTS;
 import static backend.academy.Stream.OUT;
 
 public class GallowsInput {
@@ -41,10 +41,10 @@ public class GallowsInput {
         OUT.println("Enter a maximum of 9 attempts (6 by default): ");
         String attempts = scanner.nextLine();
         if (attempts.isEmpty()) {
-            return MAX_ATTEMPTS;
+            return MAX_DEFAULT_ATTEMPTS;
         }
         if (attempts.length() != 1 || !Character.isDigit(attempts.charAt(0))) {
-            return MAX_ATTEMPTS;
+            return MAX_DEFAULT_ATTEMPTS;
         } else {
             return Integer.parseInt(attempts);
         }

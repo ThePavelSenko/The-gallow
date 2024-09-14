@@ -12,11 +12,14 @@ public class Main {
 
         view.helloMessage();
 
-        GameLogic logic = new GameLogic(
-            Dictionary.getWord(gallowsInput.getDifficulty(), gallowsInput.getCategory()).word,
-            view,
-            gallowsInput);
+        String difficulty = gallowsInput.getDifficulty();
+        String category = gallowsInput.getCategory();
+        WordData data = Dictionary.getWordData(difficulty, category);
+
+        GameLogic logic = new GameLogic(data.word, data.description, view, gallowsInput);
 
         logic.run();
+
+        OUT.close();
     }
 }
