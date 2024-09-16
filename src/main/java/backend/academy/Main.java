@@ -19,7 +19,5 @@ public class Main {
         GameLogic logic = new GameLogic(data.word, data.description, view, gallowsInput);
 
         logic.run();
-
-        OUT.close();
     }
 }
