@@ -68,11 +68,13 @@ public class Dictionary {
 
     // The logic of initialize word
     public static WordData getWordData(String difficulty, String category) {
-        String finalDifficulty = (difficulty != null && !difficulty.isEmpty() && DIFFICULTIES.contains(difficulty.toLowerCase()))
+        String finalDifficulty = (difficulty != null && !difficulty.isEmpty()
+            && DIFFICULTIES.contains(difficulty.toLowerCase()))
             ? difficulty.toLowerCase()
             : getRandomValue(DIFFICULTIES);
 
-        String finalCategory = (category != null && !category.isEmpty() && CATEGORIES.contains(category.toLowerCase()))
+        String finalCategory = (category != null && !category.isEmpty()
+            && CATEGORIES.contains(category.toLowerCase()))
             ? category.toLowerCase()
             : getRandomValue(CATEGORIES);
 
