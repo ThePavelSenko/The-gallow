@@ -27,6 +27,7 @@ public class DictionaryTest {
     @ParameterizedTest
     @MethodSource("dictionaryParameters")
     void testGetDictionaryRandomWord(String difficulty, String category, List<String> expectedWords) {
+        Dictionary.initializeWords();
         String word = Dictionary.getWordData(difficulty.toLowerCase(), category.toLowerCase()).word.toUpperCase();
 
         assertThat(expectedWords).contains(word);

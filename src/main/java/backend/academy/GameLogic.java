@@ -3,11 +3,12 @@ package backend.academy;
 import java.util.HashSet;
 import java.util.Set;
 import static backend.academy.Stream.OUT;
+import static backend.academy.Stream.SCANNER;
 
 public class GameLogic {
     public static final int MAX_DEFAULT_ATTEMPTS = 6;
     private static final int HINT_GET_STRING = 3;
-    GallowsInput gallowsInput;
+    private GallowsInput gallowsInput;
     private final String secretWord;
     private String hiddenWord;
     private int attemptsLeft;
@@ -23,7 +24,7 @@ public class GameLogic {
         this.view = view;
         this.secretWord = secretWord;
         this.hiddenWord = generateHiddenWord(secretWord.length());
-        this.attemptsLeft = gallowsInput.getMaxAttempts();
+        this.attemptsLeft = gallowsInput.getMaxAttempts(SCANNER);
         this.guessedLetters = new HashSet<>();
         this.incorrectLetters = new HashSet<>();
         this.input = new GallowsInput();
@@ -68,11 +69,11 @@ public class GameLogic {
     public void play() {
         int hint = 0;
         while (!isGameOver()) {
-            char response;
             view.displayWord(hiddenWord, guessedLetters);
             view.displayAttemptsLeft(attemptsLeft);
             view.displayGallows(attemptsLeft);
-            char letter = gallowsInput.playerInputLetter();
+
+            char letter = gallowsInput.playerInputLetter(SCANNER);
 
             if (guess(letter)) {
                 hint = 0;
@@ -85,9 +86,10 @@ public class GameLogic {
             } else {
                 hint++;
             }
+
             if (hint == HINT_GET_STRING) {
                 view.hintMessage();
-                response = input.playerInputLetter();
+                char response = input.playerInputLetter(SCANNER);
                 if (response == 'Y') {
                     OUT.println("HINT: " + wordDescription + "\n");
                 }
@@ -99,13 +101,14 @@ public class GameLogic {
         OUT.println();
     }
 
+
     public void run() {
         boolean button = false;
         input.printMessage("Press N to start a new game or Q to quit.");
 
         char response;
         do {
-            response = input.playerInputLetter();
+            response = input.playerInputLetter(SCANNER);
             if (response == 'N') {
                 play();
                 button = true;

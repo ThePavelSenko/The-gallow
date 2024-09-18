@@ -6,8 +6,7 @@ import static backend.academy.Stream.OUT;
 
 public class GallowsInput {
 
-    public char playerInputLetter() {
-        Scanner scanner = new Scanner(System.in);
+    public char playerInputLetter(Scanner scanner) {
         String str;
         OUT.print("Enter letter: ");
         str = scanner.nextLine().toUpperCase();
@@ -24,20 +23,17 @@ public class GallowsInput {
         OUT.println(message);
     }
 
-    public String getDifficulty() {
-        Scanner scanner = new Scanner(System.in);  // Создаем новый Scanner
+    public String getDifficulty(Scanner scanner) {
         OUT.println("Enter the difficulty easy/medium/hard: ");
         return scanner.nextLine();
     }
 
-    public String getCategory() {
-        Scanner scanner = new Scanner(System.in);  // Создаем новый Scanner
+    public String getCategory(Scanner scanner) {
         OUT.println("Enter the category animals/food/colors: ");
         return scanner.nextLine();
     }
 
-    public int getMaxAttempts() {
-        Scanner scanner = new Scanner(System.in);  // Создаем новый Scanner
+    public int getMaxAttempts(Scanner scanner) {
         OUT.println("Enter a maximum of 9 attempts (6 by default): ");
         String attempts = scanner.nextLine();
         if (attempts.isEmpty()) {
